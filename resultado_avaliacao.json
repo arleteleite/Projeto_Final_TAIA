@@ -1,0 +1,21 @@
+{
+  "status": "aprovado_para_revisao",
+  "nota_aderencia": 88.0,
+  "criterios_atendidos": [
+    "aderencia_ao_objetivo (Nota 90)",
+    "capacidade_tecnica (Nota 80)",
+    "impacto_comunitario (Nota 90)"
+  ],
+  "criterios_pendentes": [],
+  "documentos_faltantes": [
+    "Certidão Negativa de Débitos Ambientais"
+  ],
+  "riscos_identificados": [
+    "Cronograma de plantio das mudas está muito concentrado em poucos meses"
+  ],
+  "recomendacoes": [
+    "Apresentar plano de contingência caso ocorram atrasos na entrega das mudas"
+  ],
+  "parecer_final": "A proposta 'Reflorestamento Sustentável do Cerrado' atende muito bem aos critérios do edital, apresentando forte impacto comunitário e boa aderência aos objetivos. O projeto obteve uma excelente nota, porém exige complementação documental e mitigação de pequenos riscos operacionais identificados. Recomenda-se avançar com o projeto.",
+  "necessita_revisao_humana": true
+}

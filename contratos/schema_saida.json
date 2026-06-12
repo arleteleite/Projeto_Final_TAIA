@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Schema de Saída - Fomentô Agent",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["aprovado_para_revisao", "pendente", "incompativel"],
+      "description": "Status geral da avaliação da proposta frente ao edital"
+    },
+    "nota_aderencia": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Nota de aderência calculada entre 0 e 100"
+    },
+    "criterios_atendidos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de critérios do edital que a proposta atende"
+    },
+    "criterios_pendentes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de critérios do edital que a proposta não atende ou estão incompletos"
+    },
+    "documentos_faltantes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lista de documentos exigidos pelo edital que não foram encontrados na proposta"
+    },
+    "riscos_identificados": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Possíveis riscos de desclassificação ou pontos fracos"
+    },
+    "recomendacoes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Sugestões para melhorar a proposta e aumentar as chances de aprovação"
+    },
+    "parecer_final": {
+      "type": "string",
+      "description": "Resumo executivo da análise feita pelo agente"
+    },
+    "necessita_revisao_humana": {
+      "type": "boolean",
+      "description": "Indica se o caso exige revisão atenta de um humano"
+    }
+  },
+  "required": [
+    "status",
+    "nota_aderencia",
+    "criterios_atendidos",
+    "criterios_pendentes",
+    "documentos_faltantes",
+    "riscos_identificados",
+    "recomendacoes",
+    "parecer_final",
+    "necessita_revisao_humana"
+  ]
+}

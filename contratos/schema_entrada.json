@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Schema de Entrada - Fomentô Agent",
+  "type": "object",
+  "properties": {
+    "edital_id": {
+      "type": "string",
+      "description": "Identificador único do edital"
+    },
+    "arquivo_edital": {
+      "type": "string",
+      "description": "Caminho ou URL do arquivo do edital"
+    },
+    "arquivo_proposta": {
+      "type": "string",
+      "description": "Caminho ou URL do arquivo da proposta"
+    },
+    "tipo_edital": {
+      "type": "string",
+      "enum": ["socioambiental", "inovacao", "pesquisa", "empreendedorismo"],
+      "description": "Categoria do edital de fomento"
+    },
+    "area_tematica": {
+      "type": "string",
+      "description": "Área temática específica do projeto/edital"
+    }
+  },
+  "required": [
+    "edital_id",
+    "arquivo_edital",
+    "arquivo_proposta",
+    "tipo_edital",
+    "area_tematica"
+  ]
+}
