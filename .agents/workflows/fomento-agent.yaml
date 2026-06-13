@@ -1,0 +1,118 @@
+workflow:
+  id: analise-aderencia-fomento
+  nome: Workflow Agêntico de Avaliação de Editais
+  versao: "1.1"
+  fases:
+    - fase_1_ingestao_consulta
+    - fase_2_avaliacao_calculo
+    - fase_3_registro_saida
+  objetivo: >
+    Automatizar a análise de propostas para editais de fomento. O agente deve interpretar a proposta, acionar ferramentas para consultar critérios e calcular notas exatas, e gerar um parecer estruturado respeitando contratos rígidos.
+
+  entradas:
+    arquivos_obrigatorios:
+      - nome: minha_proposta.txt
+        tipo: txt
+      - nome: contratos/schema_entrada.json
+        tipo: json
+    arquivos_intermediarios:
+      - nome: criterios_extraidos.json
+        tipo: json
+        gerado_na_fase: 1
+        usado_na_fase: 2
+
+  restricoes:
+    gerais:
+      - Não inventar critérios que não foram retornados pela ferramenta de consulta.
+      - Não realizar cálculos matemáticos por conta própria (sempre usar tool call).
+      - Não tomar a decisão final de aprovação financeira (manter a revisão humana obrigatória).
+
+  etapas:
+    - id: validar_entrada
+      fase: 1
+      descricao: Ler os dados da proposta e validar se atendem ao schema_entrada.json.
+      saida_esperada: dados_estruturados_proposta
+      
+    - id: consultar_regras
+      fase: 1
+      descricao: Consultar o banco de dados via Tool Calling para obter pesos e critérios do edital.
+      ferramentas_permitidas:
+        - consultar_criterios_edital
+      saida_esperada: criterios_extraidos.json
+      
+    - id: avaliar_texto
+      fase: 2
+      descricao: O agente avaliador compara o texto da proposta com os critérios e atribui notas interpretativas.
+      entradas:
+        - minha_proposta.txt
+        - criterios_extraidos.json
+      criterio_conclusao:
+        - Todas as notas textuais devem ser justificadas com base exclusivamente no texto do usuário.
+
+    - id: calcular_nota
+      fase: 2
+      descricao: Calcular a nota final exata delegando a matemática para o script Python.
+      ferramentas_permitidas:
+        - calcular_nota_aderencia
+      saida_esperada: nota_final_calculada
+      
+    - id: registrar_log
+      fase: 3
+      descricao: Registrar a evidência da execução com timestamp.
+      ferramentas_permitidas:
+        - registrar_log_execucao
+        
+    - id: gerar_saida_estruturada
+      fase: 3
+      descricao: Empacotar o resultado, status, riscos e recomendações no formato final.
+      contrato_saida:
+        schema: contratos/schema_saida.json
+      criterio_conclusao:
+        - O JSON final deve ser estrito e conter a flag necessita_revisao_humana como true.
+
+  contratos:
+    proposta_entrada:
+      campos_obrigatorios:
+        - edital_id
+        - arquivo_proposta
+        - tipo_edital
+        - area_tematica
+    parecer_saida:
+      campos_obrigatorios:
+        - status
+        - nota_aderencia
+        - criterios_atendidos
+        - criterios_pendentes
+        - documentos_faltantes
+        - riscos_identificados
+        - recomendacoes
+        - parecer_final
+        - necessita_revisao_humana
+
+  validacao:
+    fase_1:
+      criterios:
+        - O tipo de edital e a área temática são válidos.
+        - Os critérios foram recuperados com sucesso pela ferramenta externa.
+    fase_2:
+      criterios:
+        - As notas textuais não ultrapassam os limites de peso do edital.
+        - O cálculo final foi retornado pela ferramenta em Python, mitigando alucinações matemáticas.
+    fase_3:
+      criterios:
+        - O log de execução foi gerado com sucesso.
+        - O arquivo JSON final foi gerado 100% de acordo com o schema de saída.
+
+  politica_de_autonomia:
+    decisao_textual:
+      - O LLM tem autonomia para julgar a qualidade do texto, extrair metas e identificar riscos logísticos.
+    decisao_matematica:
+      - Nenhuma autonomia. Obrigatoriamente delegado à ferramenta calcular_nota_aderencia.
+    decisao_final:
+      - O LLM sugere o status, mas a aprovação definitiva exige revisão humana para garantir controle operacional.
+
+  saida_final:
+    fase_3:
+      arquivos:
+        - resultado_avaliacao.json
+      finalidade: Parecer técnico estruturado e validável para suporte à decisão humana.

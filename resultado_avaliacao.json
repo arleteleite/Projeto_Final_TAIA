@@ -1,21 +1,20 @@
 {
-  "status": "aprovado_para_revisao",
-  "nota_aderencia": 88.0,
+  "status": "pendente",
+  "nota_aderencia": 84.5,
   "criterios_atendidos": [
-    "aderencia_ao_objetivo (Nota 90)",
-    "capacidade_tecnica (Nota 80)",
-    "impacto_comunitario (Nota 90)"
+    "aderencia_ao_objetivo",
+    "impacto_comunitario"
   ],
-  "criterios_pendentes": [],
-  "documentos_faltantes": [
-    "Certidão Negativa de Débitos Ambientais"
+  "criterios_pendentes": [
+    "capacidade_tecnica"
   ],
+  "documentos_faltantes": [],
   "riscos_identificados": [
-    "Cronograma de plantio das mudas está muito concentrado em poucos meses"
+    "Capacidade Técnica Crítica: A equipe executora é composta exclusivamente por recém-formados sem experiência prática comprovada em restauração ecológica, representando alto risco para a execução de 50 hectares."
   ],
   "recomendacoes": [
-    "Apresentar plano de contingência caso ocorram atrasos na entrega das mudas"
+    "Condicionar a aprovação à inclusão de um responsável técnico sênior ou contratação de consultoria especializada para orientar a execução do projeto."
   ],
-  "parecer_final": "A proposta 'Reflorestamento Sustentável do Cerrado' atende muito bem aos critérios do edital, apresentando forte impacto comunitário e boa aderência aos objetivos. O projeto obteve uma excelente nota, porém exige complementação documental e mitigação de pequenos riscos operacionais identificados. Recomenda-se avançar com o projeto.",
+  "parecer_final": "A proposta tem excelente aderência aos objetivos do edital (Nota 95) e o impacto comunitário é máximo (Nota 100), com cronograma realista e documentação completa. Entretanto, a Capacidade Técnica da equipe foi severamente penalizada (Nota 30) e considerada pendente. O projeto é de grande magnitude (50 hectares e 10.000 mudas) e será o primeiro executado por esta equipe de recém-formados, que admite não ter experiência prática. Apesar da nota final alta devido aos pesos (84.5), o risco operacional é extremo. Status alterado para 'pendente' aguardando avaliação humana sobre o risco da equipe.",
   "necessita_revisao_humana": true
 }

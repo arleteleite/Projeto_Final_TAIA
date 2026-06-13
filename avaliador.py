@@ -59,6 +59,9 @@ def avaliar_minha_proposta():
     
     json_string = json.dumps(saida, indent=2, ensure_ascii=False)
     
+    with open("resultado_avaliacao.json", "w", encoding="utf-8") as f:
+        f.write(json_string)
+        
     print("\n--- JSON GERADO COM SUCESSO ---")
     print(json_string)
 
