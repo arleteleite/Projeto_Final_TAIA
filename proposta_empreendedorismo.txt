@@ -1,0 +1,4 @@
+Título do Projeto: TechAgro: Inovação no Campo 
+1. Objetivo Principal: Criar um aplicativo de gestão financeira para pequenos produtores rurais do Tocantins. 
+2. Equipe: Dois desenvolvedores de software e um administrador. 
+3. Orçamento: R$ 50.000,00 para desenvolvimento e marketing.
