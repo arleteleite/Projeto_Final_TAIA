@@ -1,0 +1,35 @@
+name: fomento_agent_workflow
+description: Workflow agêntico para análise de aderência de propostas a editais.
+version: 1.0.0
+
+entradas:
+  schema: contratos/schema_entrada.json
+  parametros_obrigatorios: [edital_id, arquivo_proposta, tipo_edital, area_tematica]
+
+etapas:
+  - id: step_1_extracao
+    agente: LLM (Orquestrador)
+    acao: Ler texto da proposta e estruturar os dados.
+  
+  - id: step_2_consulta_regras
+    tool_call: consultar_criterios_edital
+    inputs: 
+      - tipo_edital
+      - area_tematica
+    
+  - id: step_3_analise_textual
+    agente: LLM (Avaliador)
+    acao: Comparar texto da proposta com os critérios retornados pela tool e atribuir notas.
+    depende_de: [step_1_extracao, step_2_consulta_regras]
+
+  - id: step_4_calculo_exato
+    tool_call: calcular_nota_aderencia
+    inputs: [criterios_avaliados]
+    
+  - id: step_5_registro_auditoria
+    tool_call: registrar_log_execucao
+    inputs: [etapa, status, resultado]
+
+saida:
+  schema: contratos/schema_saida.json
+  validacao: Formato JSON estrito com flag necessita_revisao_humana.
